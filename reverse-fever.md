@@ -14,7 +14,9 @@ f0VMRgIBAQAAAAAAAAAAAAIAPgABAAAAkAVAAAAAAABAAAAAAAAAAIgRAAAAAAAAAAAAAEAAOAAJAEAA
 Flag:
 ```
 
-All binaries identical for the exception of the randomly changing key, which we have to find the correct challenge for. Running the binary prompts for the challenge, encodes it, and then compares it with the random key.
+All binaries are identical for the exception of the randomly changing key, which we have to find the correct challenge for.
+
+Running the binary prompts for the challenge, encodes it, and then compares it with the random key.
 ```
 root@pwnie:~# base64 -d f0VMRgIBAQAAAAAAAAAAAAIA... > fever.bin
 
@@ -53,9 +55,9 @@ Essentially, the binary boils down to the following code:
 * `call    sub_400841` to encode the challenge
 * `call    _memcmp` to check if the encoded challenge is the same as the random key
 
-If we examine `sub_400841` (encoder), we will observe that the encoder relies on XORs, which are easily reversed by applying the same XORs. So to get the correct challenge, all we need to do is encode the random key.
+If we examine `sub_400841` (encoder), we will observe that the encoder relies on XORs, which are easily reversed by applying the same XORs. So to get the correct challenge, all we need to do is encode the provided random key.
 
-The key is hardcoded in the binary, always at `.rodata+0x10`:
+The key is always hardcoded at `.rodata+0x10`:
 ```asm
 .rodata:0000000000400A90 unk_400A90      db 0B4h ; ¦
 .rodata:0000000000400A91                 db 0EEh ; e

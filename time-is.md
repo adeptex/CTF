@@ -6,7 +6,7 @@ Check out an extremelly useful utility at time-is.quals.2017.volgactf.ru:45678
 time_is
 ```
 
-This binary had quite a few steps needed to successfully exploit it. Above all, we were somehow supposed to guess that the server is running `libc6:amd64 2.23-0ubuntu7`. Without this knowledge libc offsets are incorrectly calculated, and the whole exploits fails.
+This binary had quite a few steps needed to successfully exploit it. Above all, it was necessary to check leaked GOT offsets against https://github.com/niklasb/libc-database to find that the server is running `libc6:amd64 2.23-0ubuntu7`. Without this knowledge libc offsets in ROP are incorrectly calculated, and the whole exploits fails.
 
 ## Steps
 * Exploit format string vulnerability to leak stack address and stack canary

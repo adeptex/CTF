@@ -6,13 +6,13 @@ Check out an extremelly useful utility at time-is.quals.2017.volgactf.ru:45678
 time_is
 ```
 
-This binary had quite a few steps needed to successfully exploit it. Above all, the we were somehow supposed to guess that the server is running `libc6:amd64 2.23-0ubuntu7`. Without this knowledge, libc offsets are incorrectly calculated, and the whole exploits fails.
+This binary had quite a few steps needed to successfully exploit it. Above all, we were somehow supposed to guess that the server is running `libc6:amd64 2.23-0ubuntu7`. Without this knowledge libc offsets are incorrectly calculated, and the whole exploits fails.
 
 ## Steps
 * Exploit format string vulnerability to leak stack address and stack canary
 * Calculate libc base address using the leaked stack address
-* Find payload length to overwrite stack canary
-* Find payload length to write to stack
+* Find payload offset to overwrite stack canary
+* Find payload offset to write to stack
 * Generate an execve ROP chain rebasing everything from the libc base address
 * Exploit buffer overflow vulnerability to:
   * Overwrite stack canary using the leaked value

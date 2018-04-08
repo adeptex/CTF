@@ -78,7 +78,6 @@ The program gives an error, but `1234` is printed back, which means injected cod
 
 ```python
 from pwn import *
-import time 
 
 def xrust(data):
     global p

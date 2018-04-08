@@ -29,7 +29,7 @@ f-string: empty expression not allowed (<string>, line 6)
 An error occurred, sorry
 ```
 
-Researching `f-string` revealed that it was likely a new Python format string format (introduced in version 3.6). This fact can be confirmed by registering a valid config entry using `3. Show my template`:
+Researching `f-string` revealed that it was likely a new Python format string format (introduced in version 3.6). This fact can be confirmed by registering a valid config entry and then using `3. Show my template`:
 
 ```
 template:
@@ -40,7 +40,7 @@ configuration [
 """
 ```
 
-Looks like a Python f-string. So this pwn challenge is about Python injection. According to the docs, `{}` evalues input before supply it to the f-string. The vulnerability can be confirmed by creating a key `eval('print(1234)')` with `{}` as value:
+Looks like a Python f-string. So this pwn challenge is about Python injection. According to the docs, `{}` evalues input before supplying it to the f-string. The vulnerability can be confirmed by creating a key `eval('print(1234)')` with `{}` as value:
 
 ```
 Welcome to the config creator!
@@ -74,9 +74,9 @@ eval() arg 1 must be a string, bytes or code object
 An error occurred, sorry
 ```
 
-The program gives an error, but `1234` is printed back, which means it executed the code injected into the key. Again, according to the docs and as can be confirmed, using code with special characters and spaces will not work, because of the way f-string data is parsed. So before evaluating such code, it must first be declared as a value in one key, and then evaluated in the second key. The following exploit does just that:
+The program gives an error, but `1234` is printed back, which means injected code executed. Again, according to the docs and as can be confirmed in the challenge, using code with special characters and spaces will not work, because of the way f-strings are parsed. So before evaluating the exploit code, it must first be declared as a value in one key, and then evaluated with the second key. The following exploit does just that:
 
-```
+```python
 from pwn import *
 import time 
 

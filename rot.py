@@ -8,9 +8,9 @@ def rot(text, offset):
 
     for ch in text:
         if ch in ascii_lowercase:
-            roted += ascii_lowercase[(ord(ch) + offset) % 26]
+            roted += ascii_lowercase[(ascii_lowercase.index(ch) + offset) % 26]
         elif ch in ascii_uppercase:
-            roted += ascii_uppercase[(ord(ch) + offset) % 26]
+            roted += ascii_uppercase[(ascii_uppercase.index(ch) + offset) % 26]
         else:
             roted += ch
     

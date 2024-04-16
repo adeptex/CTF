@@ -5,7 +5,6 @@ ENV DEBIAN_FRONTEND "noninteractive"
 RUN apt-get update && apt-get install -y ruby ruby-dev build-essential make
 
 WORKDIR /opt/whatweb
-ADD . /opt/whatweb/
 
 ADD https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz .
 RUN tar xvf yaml-0.2.5.tar.gz \

@@ -1,0 +1,25 @@
+FROM debian:11-slim
+
+ENV DEBIAN_FRONTEND "noninteractive"
+
+RUN apt-get update && apt-get install -y ruby ruby-dev build-essential make
+
+WORKDIR /opt/whatweb
+ADD . /opt/whatweb/
+
+ADD https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz .
+RUN tar xvf yaml-0.2.5.tar.gz \
+    && cd yaml-0.2.5 \
+    && ./configure \
+    && make \
+    && make install
+
+ADD https://github.com/urbanadventurer/WhatWeb/archive/refs/tags/v0.5.5.tar.gz . 
+RUN tar xvf v0.5.5.tar.gz \
+    && cd WhatWeb-0.5.5 \
+    && gem install bundler \
+    && bundle update \
+    && bundle install \
+    && ./whatweb --version
+
+ENTRYPOINT [ "/opt/whatweb/whatweb" ]
